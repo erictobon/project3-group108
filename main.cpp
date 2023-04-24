@@ -109,8 +109,64 @@ int main(){
         newData->weatherMins = weatherMins;
         data.push_back(newData);
     }
-    //29 different airports, 20 years of monthly data
     inputFile.close();
-
-    
+    //29 different airports, 15 years of monthly data
+    cout << "What would you like to view? (Input a number)" << endl;
+    cout << "1. Delays by airport" << endl;
+    cout << "2. Delays by cause" << endl;
+    cout << "3. Delays by percentage of flights delayed" << endl;
+    cout << "4. Exit" << endl;
+    int choice;
+    cin >> choice;
+    while(true){
+        if (choice == 1){
+            cout << "How would you like to view the data? (Input a number)" << endl;
+            cout << "1. Total number of delays" << endl;
+            cout << "2. Total delay time in minutes" << endl;
+            int option;
+            cin >> option;
+            if (option == 1){
+                //print total number of delays
+            }
+            if (option == 2){
+                //print total delay time
+            }
+        } 
+        else if (choice == 2){
+            cout << "What data would you like to view? (Input a number)" << endl;
+            cout << "1. By airport" << endl;
+            cout << "2. All airports" << endl;
+            int airport;
+            cin >> airport;
+            cout << "How would you like to view the data? (Input a number)" << endl;
+            cout << "1. Total number of delays" << endl;
+            cout << "2. Total delay time in minutes" << endl;
+            int option;
+            cin >> option;
+            if (airport == 1){
+                //use airport data
+                if (option == 1){
+                    //print total number of delays
+                }
+                if (option == 2){
+                    //print total delay time
+                }
+            }
+            if (airport == 2){
+                //compile data from all airports
+                if (option == 1){
+                    //print total number of delays
+                }
+                if (option == 2){
+                    //print total delay time
+                }
+            }
+        }
+        else if (choice == 3){
+            //show percentage of flights delayed by airport
+        }
+        else if (choice == 4){
+            break;
+        }
+    }
 }
