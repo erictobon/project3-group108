@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#pragma once
 using namespace std;
 
 class Carrier{

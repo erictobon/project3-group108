@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "carrier.h"
+#include "graph.h"
 using namespace std;
 
 int main(){
@@ -52,9 +53,9 @@ int main(){
         Carrier* newData;
         istringstream stream(fileLine);
         getline(stream, airCode, ',');
-        newData->airCode = airCode;
+        //newData->airCode = airCode;
         getline(stream, airName, ',');
-        newData->airName = airName;
+        //newData->airName = airName;
         getline(stream, buffer, ',');
         getline(stream, month, ',');
         monthNum = stoi(month);
@@ -127,6 +128,9 @@ int main(){
             cin >> option;
             if (option == 1){
                 //print total number of delays
+                Graph g;
+                g.insertEdge(data, 1);
+                g.getData();
             }
             if (option == 2){
                 //print total delay time
