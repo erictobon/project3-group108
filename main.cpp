@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "carrier.h"
-#include "graph.h"
+#include "hashtable.h"
 using namespace std;
 
 int main(){
@@ -44,7 +44,7 @@ int main(){
     int weatherMins;
     string buffer;
     string unused;
-    ifstream inputFile("airlines.csv");
+    ifstream inputFile("/Users/daligrimaux/CLionProjects/untitled45/airlines.csv");
     //get the line with the headers
     string firstLine;
     getline(inputFile, firstLine);
@@ -137,7 +137,9 @@ int main(){
     }
     inputFile.close();
     //29 different airports, 15 years of monthly data
-    while(true){
+    Hashtable hashtable(data);
+
+    while (true) {
         cout << "What would you like to view? (Input a number)" << endl;
         cout << "1. Delays by airport" << endl;
         cout << "2. Delays by cause" << endl;
@@ -145,56 +147,39 @@ int main(){
         cout << "4. Exit" << endl;
         int choice;
         cin >> choice;
-        if (choice == 1){
+
+        if (choice == 1) {
             cout << "How would you like to view the data? (Input a number)" << endl;
             cout << "1. Total number of delays" << endl;
             cout << "2. Total delay time in minutes" << endl;
             int option;
             cin >> option;
-            if (option == 1){
-                //print total number of delays
-                Graph g;
-                g.insertEdge(data, 1);
-                g.getData();
+
+            if (option == 1) {
+                // Print total number of delays
+                hashtable.print_delays_by_airport();
+            } else if (option == 2) {
+                // Print total delay time
+                hashtable.print_delay_time_by_airport();
             }
-            if (option == 2){
-                //print total delay time
-            }
-        } 
-        else if (choice == 2){
-            cout << "What data would you like to view? (Input a number)" << endl;
-            cout << "1. By airport" << endl;
-            cout << "2. All airports" << endl;
-            int airport;
-            cin >> airport;
+        } else if (choice == 2) {
             cout << "How would you like to view the data? (Input a number)" << endl;
             cout << "1. Total number of delays" << endl;
             cout << "2. Total delay time in minutes" << endl;
             int option;
             cin >> option;
-            if (airport == 1){
-                //use airport data
-                if (option == 1){
-                    //print total number of delays
-                }
-                if (option == 2){
-                    //print total delay time
-                }
+
+            if (option == 1) {
+                // Print total number of delays by cause
+                hashtable.print_delays_by_cause();
+            } else if (option == 2) {
+                // Print total delay time by cause
+                hashtable.print_delay_time_by_cause();
             }
-            if (airport == 2){
-                //compile data from all airports
-                if (option == 1){
-                    //print total number of delays
-                }
-                if (option == 2){
-                    //print total delay time
-                }
-            }
-        }
-        else if (choice == 3){
-            //show percentage of flights delayed by airport
-        }
-        else if (choice == 4){
+        } else if (choice == 3) {
+            // Show percentage of flights delayed by airport
+            hashtable.print_percentage_of_flights_delayed();
+        } else if (choice == 4) {
             break;
         }
     }
