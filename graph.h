@@ -117,6 +117,46 @@ void Graph::getDataFour(){
 }
 
 void Graph::getDataThree(){
+    map<string, int> carrierResults;
+    map<string, int> lateResults;
+    map<string, int> aviationResults;
+    map<string, int> securityResults;
+    map<string, int> weatherResults;
+
+    for(auto iter = carrierGraph.begin(); iter != carrierGraph.end(); iter++){
+        for(int j = 0; j < carrierGraph[iter->first].size(); j++){
+            carrierResults[iter->second[j].first] += iter->second[j].second;
+        }
+    }
+    for(auto iter = lateGraph.begin(); iter != lateGraph.end(); iter++){
+        for(int j = 0; j < lateGraph[iter->first].size(); j++){
+            lateResults[iter->second[j].first] += iter->second[j].second;
+        }
+    }
+    for(auto iter = systemGraph.begin(); iter != systemGraph.end(); iter++){
+        for(int j = 0; j < systemGraph[iter->first].size(); j++){
+            aviationResults[iter->second[j].first] += iter->second[j].second;
+        }
+    }
+    for(auto iter = securityGraph.begin(); iter != securityGraph.end(); iter++){
+        for(int j = 0; j < securityGraph[iter->first].size(); j++){
+            securityResults[iter->second[j].first] += iter->second[j].second;
+        }
+    }
+    for(auto iter = weatherGraph.begin(); iter != weatherGraph.end(); iter++){
+        for(int j = 0; j < weatherGraph[iter->first].size(); j++){
+            weatherResults[iter->second[j].first] += iter->second[j].second;
+        }
+    }
+
+    for(auto iter = carrierResults.begin(); iter != carrierResults.end(); iter++){
+        cout << iter->first << ":" << endl;
+        cout << "Carrier Delays " << carrierResults[iter->first] << endl;
+        cout << "Late Aircraft Delays: " << lateResults[iter->first] << endl;
+        cout << "National Aviation System Delays: " << aviationResults[iter->first] << endl;
+        cout << "Security Delays: " << securityResults[iter->first] << endl;
+        cout << "Weather Delays: " << weatherResults[iter->first] << endl;
+    }
 
 }
 
