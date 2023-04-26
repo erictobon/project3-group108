@@ -154,11 +154,13 @@ int main(){
             if (option == 1){
                 //print total number of delays
                 Graph g;
-                g.insertEdge(data, 1);
-                g.getData();
+                g.insert(data, 1);
+                g.getDataOne();
             }
             if (option == 2){
                 //print total delay time
+                Graph g;
+                g.insert(data, 2);
             }
         } 
         else if (choice == 2){
@@ -176,6 +178,9 @@ int main(){
                 //use airport data
                 if (option == 1){
                     //print total number of delays
+                    Graph g;
+                    g.insert(data, 3);
+                    g.getDataThree();
                 }
                 if (option == 2){
                     //print total delay time
