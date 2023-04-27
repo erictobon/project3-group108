@@ -45,7 +45,7 @@ int main(){
     int weatherMins;
     string buffer;
     string unused;
-    ifstream inputFile("airlines.csv");
+    ifstream inputFile("/Users/daligrimaux/CLionProjects/untitled45/airlines.csv");
     //get the line with the headers
     string firstLine;
     getline(inputFile, firstLine);
@@ -185,7 +185,7 @@ int main(){
                     hashtable.print_delay_time_by_airport();
                 }
             }
-        } 
+        }
         else if (choice == 2){
             cout << "What data would you like to view? (Input a number)" << endl;
             cout << "1. Individually by airport" << endl;
@@ -270,6 +270,8 @@ int main(){
             string date;
             cout << "Enter the month and year of the data you wish to see (MM/YYYY)" << endl;
             cin >> date;
+            int month = stoi(date.substr(0, 2));
+            int year = stoi(date.substr(3));
             string airportCode;
             cout << "Enter the 3 letter code of the airport" << endl;
             cin >> airportCode;
@@ -280,9 +282,18 @@ int main(){
             cout << "3. National Aviation System Data" << endl;
             cout << "4. Security Data" << endl;
             cout << "5. Weather Data" << endl;
-            cout << "6.  Data" << endl;
+            cout << "6. Data" << endl;
             cin >> dataNum;
-            g.search(date, airportCode, dataNum);
+            string structure;
+            cout << "Which data structure would you like to use? (Type graph or hash)" << endl;
+            cin >> structure;
+            if(structure == "hash"){
+                hashtable.custom_data_selection(month, year, airportCode, dataNum);
+            }
+            if(structure == "graph"){
+                g.search(date, airportCode, dataNum);
+            }
+
         }
         else if(choice == 5){
             break;
