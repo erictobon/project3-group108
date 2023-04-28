@@ -34,6 +34,7 @@ private:
     unordered_map<string, int> delay_time_by_avs;
     unordered_map<string, int> delay_time_by_security;
     unordered_map<string, int> delay_time_by_weather;
+    unordered_map<string, int> total_flights_by_airport;
     unordered_map<string, vector<pair<string, Carrier*>>> specific_data;
     unordered_map<string, double> percentage_of_flights_delayed;
 
@@ -67,6 +68,7 @@ void Hashtable::populate_hashtables(const vector<Carrier*>& data) {
         delay_time_by_avs[airport_code] += carrier->aviationMins;
         delay_time_by_security[airport_code] += carrier->securityMins;
         delay_time_by_weather[airport_code] += carrier->weatherMins;
+        total_flights_by_airport[airport_code] += carrier->flightsNum;
         percentage_of_flights_delayed[airport_code] = (static_cast<double>(carrier->delaysNum) / carrier->flightsNum) * 100;
         specific_data[hashFunction(carrier->month, carrier->year)].push_back(make_pair(airport_code, carrier));
     }
@@ -145,8 +147,8 @@ void Hashtable::print_total_minutes_by_cause(){
 }
 
 void Hashtable::print_percentage_of_flights_delayed() {
-    for (const auto &entry : percentage_of_flights_delayed) {
-        cout << entry.first << ": " << fixed << setprecision(2) << entry.second << "%" << endl;
+    for (const auto &entry : total_flights_by_airport) {
+        cout << entry.first << ": " << fixed << setprecision(2) << double(delays_by_airport[entry.first]) / entry.second * 100 << "%" << endl;
     }
 }
 

@@ -96,7 +96,7 @@ void Graph::getDataOne(){
             num += iter->second[j].second;
         }
         cout << iter->first + ": ";
-        cout << num << endl;
+        cout << num << " delays" << endl;
     }
 }
 
@@ -286,7 +286,8 @@ void Graph::getDataSeven(){
             tnum += totalGraph[iter->first][i].second;
         }
         cout << iter->first + ": ";
-        cout << (dnum/tnum) * 100  << endl;
+        cout << fixed << setprecision(2);
+        cout << (dnum/tnum) * 100  << "%" << endl;
     }
 }
 

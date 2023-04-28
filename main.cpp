@@ -146,7 +146,7 @@ int main(){
         cout << "What would you like to view? (Input a number)" << endl;
         cout << "1. Delays by airport" << endl;
         cout << "2. Delays by cause" << endl;
-        cout << "3. Delays by percentage of flights delayed" << endl;
+        cout << "3. Percentage of flights delayed" << endl;
         cout << "4. Search Specifics" << endl;
         cout << "5. Exit" << endl;
         int choice;
@@ -317,7 +317,7 @@ int main(){
         }
         else if (choice == 4){
             string date;
-            cout << "Enter the month and year of the data you wish to see (MM/YYYY)" << endl;
+            cout << "Enter the month and year of the data you wish to see (M/YYYY)" << endl;
             cin >> date;
             string airportCode;
             cout << "Enter the 3 letter code of the airport" << endl;
