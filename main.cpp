@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 #include "carrier.h"
 #include "hashtable.h"
 #include "graph.h"
@@ -45,7 +46,7 @@ int main(){
     int weatherMins;
     string buffer;
     string unused;
-    ifstream inputFile("/Users/daligrimaux/CLionProjects/untitled45/airlines.csv");
+    ifstream inputFile("airlines.csv");
     //get the line with the headers
     string firstLine;
     getline(inputFile, firstLine);
@@ -151,6 +152,8 @@ int main(){
         int choice;
         cin >> choice;
 
+        clock_t start = clock();
+        clock_t end = clock();
         if (choice == 1){
             cout << "How would you like to view the data? (Input a number)" << endl;
             cout << "1. Total number of delays" << endl;
@@ -165,11 +168,16 @@ int main(){
                 if (structure == "graph"){
                     Graph g;
                     g.insert(data, 1);
+                    start = clock();
                     g.getDataOne();
+                    end = clock();
                 }
                 if (structure == "hash"){
+                    start = clock();
                     hashtable.print_delays_by_airport();
+                    end = clock();
                 }
+                cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
             }
             if (option == 2){
                 //print total delay time
@@ -179,13 +187,18 @@ int main(){
                 if (structure == "graph"){
                     Graph g;
                     g.insert(data, 2);
+                    start = clock();
                     g.getDataTwo();
+                    end = clock();
                 }
                 if (structure == "hash"){
+                    start = clock();
                     hashtable.print_delay_time_by_airport();
+                    end = clock();
                 }
+                cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
             }
-        }
+        } 
         else if (choice == 2){
             cout << "What data would you like to view? (Input a number)" << endl;
             cout << "1. Individually by airport" << endl;
@@ -209,11 +222,16 @@ int main(){
                     if (structure == "graph"){
                         Graph g;
                         g.insert(data, 3);
+                        start = clock();
                         g.getDataThree();
+                        end = clock();
                     }
                     if (structure == "hash"){
+                        start = clock();
                         hashtable.print_delays_by_cause();
+                        end = clock();
                     }
+                    cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
                 }
                 if (option == 2){
                     //print delay time
@@ -223,11 +241,16 @@ int main(){
                     if (structure == "graph"){
                         Graph g;
                         g.insert(data, 4);
+                        start = clock();
                         g.getDataFive();
+                        end = clock();
                     }
                     if (structure == "hash"){
+                        start = clock();
                         hashtable.print_delay_time_by_cause();
+                        end = clock();
                     }
+                    cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
                 }
             }
             if (airport == 2){
@@ -240,11 +263,35 @@ int main(){
                     if (structure == "graph"){
                         Graph g;
                         g.insert(data, 3);
+                        start = clock();
                         g.getDataFour();
+                        end = clock();
                     }
+                    if (structure == "hash"){
+                        start = clock();
+                        hashtable.print_total_by_cause();
+                        end = clock();
+                    }
+                    cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
                 }
                 if (option == 2){
                     //print total delay time
+                    string structure;
+                    cout << "Which data structure would you like to use? (Type graph or hash)" << endl;
+                    cin >> structure;
+                    if (structure == "graph"){
+                        Graph g;
+                        g.insert(data, 4);
+                        start = clock();
+                        g.getDataSix();
+                        end = clock();
+                    }
+                    if (structure == "hash"){
+                        start = clock();
+                        hashtable.print_total_minutes_by_cause();
+                        end = clock();
+                    }
+                    cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
                 }
             }
         }
@@ -254,24 +301,24 @@ int main(){
             cout << "Which data structure would you like to use? (Type graph or hash)" << endl;
             cin >> structure;
             if(structure == "hash"){
+                start = clock();
                 hashtable.print_percentage_of_flights_delayed();
+                end = clock();
             }
-            else{
+            if (structure == "graph"){
                 Graph g;
                 g.insert(data, 1);
                 g.insert(data, 5);
+                start = clock();
                 g.getDataSeven();
+                end = clock();
             }
+            cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
         }
         else if (choice == 4){
-            Graph g;
-            g.insert(data, 3);
-            g.insert(data, 4);
             string date;
             cout << "Enter the month and year of the data you wish to see (MM/YYYY)" << endl;
             cin >> date;
-            int month = stoi(date.substr(0, 2));
-            int year = stoi(date.substr(3));
             string airportCode;
             cout << "Enter the 3 letter code of the airport" << endl;
             cin >> airportCode;
@@ -282,18 +329,25 @@ int main(){
             cout << "3. National Aviation System Data" << endl;
             cout << "4. Security Data" << endl;
             cout << "5. Weather Data" << endl;
-            cout << "6. Data" << endl;
+            cout << "6. All Data" << endl;
             cin >> dataNum;
             string structure;
             cout << "Which data structure would you like to use? (Type graph or hash)" << endl;
             cin >> structure;
-            if(structure == "hash"){
-                hashtable.custom_data_selection(month, year, airportCode, dataNum);
-            }
-            if(structure == "graph"){
+            if (structure == "graph"){
+                Graph g;
+                g.insert(data, 3);
+                g.insert(data, 4);
+                start = clock();
                 g.search(date, airportCode, dataNum);
+                end = clock();
             }
-
+            if (structure == "hash"){
+                start = clock();
+                hashtable.print_search_value(airportCode, date, dataNum);
+                end = clock();
+            }
+            cout << (end - start) * 1000.0 / CLOCKS_PER_SEC << " ms for " << structure << endl;
         }
         else if(choice == 5){
             break;

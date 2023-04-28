@@ -6,6 +6,7 @@
 #include "carrier.h"
 #include <cmath>
 #include <random>
+#pragma once
 using namespace std;
 
 class Graph{
@@ -336,25 +337,44 @@ string Graph::date(int month, int year){
 
 void Graph::search(string date, string airportCode, int dataNum){
     if(dataNum == 1){
-        cout << "Carrier data for " << airportCode << "in " << date << endl;
+        cout << "Carrier data for " << airportCode << " from " << date << endl;
         cout << "Carrier Delay Number: " << carrierGraph[date][findIndex(date, airportCode)].second << endl;
-        //cout << "Carrier Delay in Minutes: " << carrierTimeGraph[date] << endl;
+        cout << "Carrier Delay in Minutes: " << carrierTimeGraph[date][findIndex(date, airportCode)].second << endl;
     }
     else if(dataNum == 2){
-
+        cout << "Late flight data for " << airportCode << " from " << date << endl;
+        cout << "Late Flight Delay Number: " << lateGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Late Flight Delay in Minutes: " << lateTimeGraph[date][findIndex(date, airportCode)].second << endl;
     }
     else if(dataNum == 3){
-        
+        cout << "National Aviation System data for " << airportCode << " from " << date << endl;
+        cout << "National Aviation System Delay Number: " << systemGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "National Aviation System Delay in Minutes: " << systemTimeGraph[date][findIndex(date, airportCode)].second << endl; 
     }
     else if(dataNum == 4){
-        
+        cout << "Security data for " << airportCode << " from " << date << endl;
+        cout << "Security Delay Number: " << securityGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Security Delay in Minutes: " << securityTimeGraph[date][findIndex(date, airportCode)].second << endl; 
     }
     else if(dataNum == 5){
-        
+        cout << "Weather data for " << airportCode << " from " << date << endl;
+        cout << "Weather Delay Number: " << weatherGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Weather Delay in Minutes: " << weatherTimeGraph[date][findIndex(date, airportCode)].second << endl;
     }
     else if(dataNum == 6){
-        
+        cout << "All Data for " << airportCode << " from " << date << endl;
+        cout << "Carrier Delay Number: " << carrierGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Carrier Delay in Minutes: " << carrierTimeGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Late Flight Delay Number: " << lateGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Late Flight Delay in Minutes: " << lateTimeGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "National Aviation System Delay Number: " << systemGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "National Aviation System Delay in Minutes: " << systemTimeGraph[date][findIndex(date, airportCode)].second << endl; 
+        cout << "Security Delay Number: " << securityGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Security Delay in Minutes: " << securityTimeGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Weather Delay Number: " << weatherGraph[date][findIndex(date, airportCode)].second << endl;
+        cout << "Weather Delay in Minutes: " << weatherTimeGraph[date][findIndex(date, airportCode)].second << endl;
     }
+
 }
 
 int Graph::findIndex(string date, string airportCode){
